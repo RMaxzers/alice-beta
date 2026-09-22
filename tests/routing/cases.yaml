@@ -1,0 +1,54 @@
+# EVALUATION set (not used for tuning). attached = kinds of attached docs.
+- {q: "Explícame qué es una VLAN.", route: LOCAL_SIMPLE}
+- {q: "Explícame DHCP en pocas palabras", route: LOCAL_SIMPLE}
+- {q: "¿Qué diferencia hay entre RAID 1 y RAID 5?", route: LOCAL_SIMPLE}
+- {q: "Dame tres consejos para dormir mejor", route: LOCAL_SIMPLE}
+- {q: "What is a subnet mask?", route: LOCAL_SIMPLE}
+- {q: "Escribe un PowerShell que muestre los cinco procesos que más CPU consumen.", route: LOCAL_CODE}
+- {q: "Genera una función que valide estas direcciones IP", route: LOCAL_CODE}
+- {q: "Corrige este código Python: for i in range(10) print(i)", route: LOCAL_CODE}
+- {q: "Escribe una regex para validar correos", route: LOCAL_CODE}
+- {q: "¿Cómo hago un bucle en bash que recorra archivos .log?", route: LOCAL_CODE}
+- {q: "¿Cuáles son los hallazgos principales?", route: LOCAL_RAG, attached: [pdf]}
+- {q: "Según el documento, ¿qué recomienda para las contraseñas?", route: LOCAL_RAG}
+- {q: "Resume la sección de riesgos", route: LOCAL_RAG, attached: [markdown]}
+- {q: "¿Cuántos elementos cumplen X?", route: STRUCTURED_QUERY, attached: [csv]}
+- {q: "¿Cuántos activos del inventario están fuera de soporte?", route: STRUCTURED_QUERY}
+- {q: "Suma el total de licencias por área en la planilla", route: STRUCTURED_QUERY}
+- {q: "¿Cuál es el error más frecuente?", route: LOG_ANALYSIS, attached: [log]}
+- {q: "¿Qué patrones de error aparecen en el log?", route: LOG_ANALYSIS}
+- {q: "Investiga las novedades recientes de Ollama.", route: WEB_RESEARCH}
+- {q: "¿Cuáles son las últimas noticias sobre Tailscale?", route: WEB_RESEARCH}
+- {q: "Busca en internet la última versión de Grafana", route: WEB_RESEARCH}
+- {q: "¿Cuál es la cotización actual del cobre en Londres?", route: FINANCIAL_RESEARCH}
+- {q: "¿A cuánto está el dólar observado hoy en Chile?", route: FINANCIAL_RESEARCH}
+- {q: "Compara la capitalización bursátil de Nvidia y AMD", route: FINANCIAL_RESEARCH}
+- {q: "¿Cómo está Alice?", route: OBSERVABILITY}
+- {q: "¿Cuánta CPU y RAM está usando el sistema?", route: OBSERVABILITY}
+- {q: "¿Cuánta VRAM estoy utilizando?", route: OBSERVABILITY}
+- {q: "¿Qué contenedor consume más memoria?", route: OBSERVABILITY}
+- {q: "¿Están todos los servicios de Alice funcionando?", route: OBSERVABILITY}
+- {q: "¿Qué modelo está cargado en Ollama?", route: OBSERVABILITY}
+- {q: "¿Cuántas consultas fueron locales hoy?", route: OBSERVABILITY}
+- {q: "¿Cuál fue la consulta más lenta?", route: OBSERVABILITY}
+- {q: "¿Cómo cambió la GPU durante los últimos 30 minutos?", route: OBSERVABILITY}
+- {q: "¿Por qué Alice estuvo lenta durante la última hora?", route: OBSERVABILITY}
+- {q: "Dame los últimos errores del contenedor de Qdrant.", route: OBSERVABILITY}
+- {q: "¿Qué ocurrió con CPU, RAM y GPU durante mi última consulta?", route: OBSERVABILITY}
+- {q: "Automatiza un resumen diario de mis logs", route: AUTOMATION}
+- {q: "Usa el modelo más potente para diseñar una estrategia de migración a la nube con análisis de riesgos", route: CLOUD_POWERFUL}
+- {q: "Hazme un análisis profundo de pros y contras de microservicios vs monolito", route: CLOUD_POWERFUL}
+- {q: "¿Por qué el cielo es azul?", route: LOCAL_SIMPLE}
+# --- holdout-2: written after the first eval run, before re-running (not used to adjust rules)
+- {q: "Crea un script de Python que mida el uso de RAM de un proceso", route: LOCAL_CODE, set: holdout2}
+- {q: "Investiga qué cambió en Prometheus 3", route: WEB_RESEARCH, set: holdout2}
+- {q: "¿Cuánta memoria está usando el contenedor de Grafana?", route: OBSERVABILITY, set: holdout2}
+- {q: "¿Qué es un hipervisor?", route: LOCAL_SIMPLE, set: holdout2}
+- {q: "¿Cuántos equipos del inventario tienen Windows 10?", route: STRUCTURED_QUERY, set: holdout2}
+- {q: "¿A qué hora ocurrió el primer error en el log?", route: LOG_ANALYSIS, set: holdout2}
+- {q: "¿Cuál es el precio de la acción de Apple?", route: FINANCIAL_RESEARCH, set: holdout2}
+- {q: "Según mis documentos, ¿quién aprobó el cambio?", route: LOCAL_RAG, set: holdout2}
+- {q: "Explica la diferencia entre proceso e hilo", route: LOCAL_SIMPLE, set: holdout2}
+- {q: "¿Está funcionando Prometheus?", route: OBSERVABILITY, set: holdout2}
+- {q: "Últimas noticias sobre la regulación de IA en Chile", route: WEB_RESEARCH, set: holdout2}
+- {q: "Escribe una consulta SQL que agrupe ventas por mes", route: LOCAL_CODE, set: holdout2}

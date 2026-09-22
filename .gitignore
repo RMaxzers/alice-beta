@@ -1,0 +1,36 @@
+# secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+
+# runtime data (never in git)
+data/raw/
+data/processed/
+data/verified/
+data/quarantine/
+storage/
+logs/
+backups/
+work/
+infra/bin/
+infra/grafana/data/
+
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+
+# node
+node_modules/
+apps/web/dist/
+
+# os/editor
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/

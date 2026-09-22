@@ -1,0 +1,32 @@
+# Semantic-routing exemplars (TUNING set). Evaluation cases live in tests/routing/cases.yaml and must not be copied here.
+LOCAL_SIMPLE:
+  - ¿Qué es una dirección IP?
+  - Resume en pocas palabras qué es la virtualización
+  - Dame una definición de latencia de red
+  - ¿Cuál es la diferencia entre TCP y UDP?
+  - Explica qué hace un servidor DNS
+  - Tradúceme esta frase al inglés
+LOCAL_CODE:
+  - Necesito un script que renombre archivos por fecha
+  - ¿Cómo leo un archivo JSON en Python?
+  - Arregla este bucle que no termina
+  - Haz un comando que liste los puertos abiertos
+LOCAL_RAG:
+  - ¿Qué dice el informe sobre el presupuesto?
+  - Busca en mis documentos la política de contraseñas
+  - Resume el manual que subí
+OBSERVABILITY:
+  - ¿Cuánta memoria queda libre?
+  - ¿Está funcionando Qdrant?
+  - ¿Qué tan cargado está el equipo?
+WEB_RESEARCH:
+  - ¿Qué se anunció en la última conferencia de Microsoft?
+  - Encuentra artículos actuales sobre Kubernetes 2.0
+FINANCIAL_RESEARCH:
+  - ¿A cuánto está el cobre?
+  - Compara el rendimiento de dos fondos indexados este año
+CLOUD_POWERFUL:
+  - Diseña una arquitectura completa multi-región con análisis de costos y riesgos
+  - Escribe un ensayo largo y matizado comparando tres marcos regulatorios
+AUTOMATION:
+  - Avísame cuando termine la ingestión

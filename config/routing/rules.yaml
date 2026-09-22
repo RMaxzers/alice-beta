@@ -1,0 +1,63 @@
+# Deterministic routing rules, evaluated in order. First match wins.
+# Patterns are case-insensitive Python regexes over the accent-stripped message.
+rules:
+- route: WEB_RESEARCH
+  category: web
+  requires_web: true
+  patterns:
+  - \b(investiga|busca en (la )?web|busca en internet|googlea)\b
+  - \b(novedades|ultimas noticias|noticias recientes|lo mas reciente|recientemente|esta semana|hoy en dia)\b
+  - \b(ultima version|release notes|changelog) de\b
+- route: LOCAL_CODE
+  category: code
+  patterns:
+  - \b(escribe|genera|crea|programa|corrige|refactoriza|depura|explica) (un|una|el|la|este|esta)? ?(script|codigo|funcion|clase|programa|query|consulta sql|regex|expresion regular)\b
+  - \b(powershell|python|javascript|typescript|bash|golang|rust|c#|sql|regex)\b.*\b(que|para|muestre|calcule|valide|liste)\b
+  - \bstack ?trace\b|\btraceback\b|\bexcepcion\b.*\bcodigo\b
+- route: OBSERVABILITY
+  category: observability
+  requires_tools: true
+  patterns:
+  - \b(cpu|ram|vram|gpu|memoria del sistema|uso de memoria|temperatura)\b
+  - \b(contenedor|contenedores|container|docker)\b
+  - \bcomo esta alice\b|\bestado de alice\b|\balice (esta|estuvo) lenta\b|\bcomponente de alice\b
+  - \bservicios? de alice\b|\bhealth\b|\bsalud del sistema\b
+  - \bmodelo (esta )?cargado\b|\bque modelo .*ollama\b
+  - \bconsultas? (fueron )?(locales|a cloud|en la nube)\b|\bconsulta mas lenta\b|\bcuanto gaste\b|\bcuanto costo el cloud\b
+  - \brecursos del sistema\b|\bmi ultima consulta\b|\bmetricas\b|\bprometheus\b|\bgrafana\b
+- route: FINANCIAL_RESEARCH
+  category: finance
+  requires_web: true
+  patterns:
+  - \b(cotizacion|precio de la accion|acciones de|bolsa|ipsa|s&p|nasdaq|dow jones|bitcoin|btc|ethereum)\b
+  - \b(tipo de cambio|dolar observado|tasa de interes|tasa de politica monetaria|inflacion|ipc|uf hoy)\b
+  - \b(resultados trimestrales|estados financieros de|market cap|capitalizacion bursatil)\b
+- route: LOG_ANALYSIS
+  category: logs
+  requires_tools: true
+  patterns:
+  - \b(el|este|del|los) logs?\b|\berror(es)? mas frecuentes?\b|\bpatrones de error\b|\bsegun el log\b
+- route: STRUCTURED_QUERY
+  category: tabular
+  requires_sql: true
+  patterns:
+  - \bcuant[oa]s? .*(cumplen|estan|tienen|hay en (la|el) (tabla|inventario|matriz|dataset))\b
+  - \b(inventario|matriz|planilla|tabla|dataset|csv|xlsx)\b.*\b(cuant|suma|total|promedio|agrupa|filtra)
+  - \b(cuant|suma|total|promedio)\w*\b.*\b(inventario|matriz|planilla|tabla|dataset)\b
+- route: LOCAL_RAG
+  category: knowledge
+  requires_rag: true
+  patterns:
+  - \b(segun|en) (el|los|mis|este|estos) (documento|documentos|pdf|archivo|archivos|informe|manual)\b
+  - \b(hallazgos|conclusiones) (principales|del informe|del documento)\b
+  - \bmi (base de )?conocimiento\b|\bmis notas\b
+- route: AUTOMATION
+  category: automation
+  requires_tools: true
+  patterns:
+  - \b(automatiza|programa una tarea|crea una tarea|recordatorio|cada (dia|hora|semana) (ejecuta|haz))\b
+- route: CLOUD_POWERFUL
+  category: complex
+  patterns:
+  - \b(usa|usar|con) (el )?(modelo )?(cloud|nube|potente|mas potente)\b
+  - \banalisis (muy )?profundo\b
