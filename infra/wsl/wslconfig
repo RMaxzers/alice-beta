@@ -1,0 +1,16 @@
+# Template for %USERPROFILE%\.wslconfig (installed by Install-DockerWSL.ps1 only if no .wslconfig exists).
+# Budget for a 16 GB host: WSL VM capped at 4 GB so Windows, Ollama and the browser keep headroom.
+[wsl2]
+memory=4GB
+processors=4
+swap=2GB
+# Mirrored: Windows 127.0.0.1 <-> WSL 127.0.0.1, keeps every service loopback-only with the same ports.
+networkingMode=mirrored
+# Hyper-V firewall applies Windows firewall rules to the VM (default on; stated explicitly).
+firewall=true
+# Do not let the VM take GPU/other devices we don't need; Ollama stays on Windows.
+guiApplications=false
+
+[experimental]
+autoMemoryReclaim=dropCache
+sparseVhd=true

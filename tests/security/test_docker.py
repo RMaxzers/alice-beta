@@ -92,3 +92,23 @@ def test_docker_absent_reports_unavailable():
     assert d.status()["state"] == "unavailable"
     with pytest.raises(DockerDenied):
         d.call("list_containers")
+
+
+def test_wsl_prefix_keeps_argv_without_shell():
+    """Docker Engine inside WSL: every call is `wsl.exe -d <distro> --exec docker <fixed verb> ...` (no bash -c, no shell)."""
+    prefix = ("wsl.exe", "-d", "Ubuntu-24.04", "--exec", "docker")
+    calls = []
+
+    def runner(argv, timeout):
+        calls.append(argv)
+        return FakeDocker()(argv[len(prefix) - 1:], timeout)  # hand the "docker ..." tail to the fake
+
+    d = DockerAdapter(ALLOWED, runner=runner, prefix=prefix)
+    assert d.status()["state"] == "healthy"
+    d.call("container_logs", ref="alice-qdrant")
+    with pytest.raises(DockerDenied):
+        d.call("container_logs", ref="alice-qdrant; rm -rf /")
+    for c in calls:
+        assert tuple(c[:5]) == prefix
+        assert not {"bash", "sh", "-c", "--shell-type"} & set(c)
+    assert {c[5] for c in calls} <= {"version", "ps", "logs"}

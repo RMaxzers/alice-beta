@@ -4,6 +4,7 @@
 . "$PSScriptRoot\_common.ps1"
 $cfg = Read-DotEnv
 $st  = Join-Path $Root 'storage'
+$runtime = Get-Runtime   # native (default) | docker (phase 2: Qdrant/Prometheus/Grafana in WSL2 Compose)
 
 # 1. Ollama (reuse a running instance; never started twice)
 if (-not (Test-Http 'http://127.0.0.1:11434/api/version')) {
@@ -11,12 +12,15 @@ if (-not (Test-Http 'http://127.0.0.1:11434/api/version')) {
 }
 
 # 2. Qdrant (loopback, telemetry off)
+if ($runtime -eq 'native') {
 $q = $Versions.qdrant
 Start-Owned 'qdrant' (Join-Path $Bin "qdrant-$($q.ver)\qdrant.exe") @() @{
   QDRANT__SERVICE__HOST = '127.0.0.1'; QDRANT__SERVICE__HTTP_PORT = '6333'; QDRANT__SERVICE__GRPC_PORT = '6334'
   QDRANT__STORAGE__STORAGE_PATH = (Join-Path $st 'qdrant\data'); QDRANT__STORAGE__SNAPSHOTS_PATH = (Join-Path $st 'qdrant\snapshots')
   QDRANT__TELEMETRY_DISABLED = 'true'
 } (Join-Path $st 'qdrant')
+
+}
 
 # 3. windows_exporter (host metrics; user process, loopback)
 $w = $Versions.winexp
@@ -27,6 +31,10 @@ Start-Owned 'windows_exporter' (Join-Path $Bin "winexp-$($w.ver)\windows_exporte
 $py = Join-Path $Root '.venv\Scripts\python.exe'
 Start-Owned 'alice-api' $py @('-m', 'uvicorn', 'apps.api.main:app', '--host', '127.0.0.1', '--port', '8000', '--no-server-header', '--no-proxy-headers', '--log-level', 'warning')
 
+if ($runtime -eq 'docker') {
+  # 5+6. Prometheus + Grafana (+ Qdrant) as the Compose project 'alice' inside WSL2
+  Invoke-Compose @('up', '-d')
+} else {
 # 5. Prometheus
 $p = $Versions.prometheus; $pdir = Join-Path $Bin "prometheus-$($p.ver)\prometheus-$($p.ver).windows-amd64"
 Start-Owned 'prometheus' (Join-Path $pdir 'prometheus.exe') @(
@@ -45,6 +53,7 @@ Start-Owned 'grafana' (Join-Path $gdir 'bin\grafana.exe') @('server', '--homepat
   GF_NEWS_NEWS_FEED_ENABLED = 'false'
   # Tailnet Viewer access (Serve :8444) needs a matching root URL; falls back to loopback.
   GF_SERVER_ROOT_URL = $(if ($cfg['ALICE_GRAFANA_PUBLIC_URL']) { $cfg['ALICE_GRAFANA_PUBLIC_URL'] } else { 'http://127.0.0.1:3000/' })
+}
 }
 
 # Wait for health, then ensure the tailnet Viewer account (idempotent; admin creds never leave this script).

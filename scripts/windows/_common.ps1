@@ -53,3 +53,28 @@ function Wait-Http([string]$Url, [int]$Seconds = 30) {
   while ((Get-Date) -lt $deadline) { if (Test-Http $Url) { return $true }; Start-Sleep -Milliseconds 500 }
   $false
 }
+
+# ---- Phase 2: Docker Engine inside a dedicated WSL2 distro --------------------------------------------
+$Script:Distro   = 'alice-ubuntu'
+$Script:WslHome  = Join-Path $env:LOCALAPPDATA 'alice-wsl'   # VHD location (outside the repo, not synced)
+function ConvertTo-WslPath([string]$p) { '/mnt/' + $p.Substring(0, 1).ToLower() + $p.Substring(2).Replace([char]92, [char]47) }
+$Script:ComposeFile = ConvertTo-WslPath (Join-Path $Root 'infra\compose\docker-compose.yml')
+
+function Get-Runtime { $e = Read-DotEnv; if ($e['ALICE_RUNTIME'] -eq 'docker') { 'docker' } else { 'native' } }
+
+function Test-DistroRegistered {
+  $env:WSL_UTF8 = '1'
+  $list = (& wsl.exe --list --quiet 2>$null) -replace "`0", ''
+  [bool]($list | Where-Object { $_.Trim() -eq $Distro })
+}
+
+# Compose with only the variables it needs (never the whole .env) written to a temp file inside WSL.
+function Invoke-Compose([string[]]$ComposeArgs) {
+  $e = Read-DotEnv
+  $vars = "GRAFANA_ADMIN_PASSWORD=$($e['GRAFANA_ADMIN_PASSWORD'])`nALICE_GRAFANA_PUBLIC_URL=$($e['ALICE_GRAFANA_PUBLIC_URL'])`n"
+  $vars | & wsl.exe -d $Distro --exec sh -c 'umask 077; cat > /tmp/alice-compose.env'
+  & wsl.exe -d $Distro --exec docker compose -p alice -f $ComposeFile --env-file /tmp/alice-compose.env @ComposeArgs
+  $rc = $LASTEXITCODE
+  & wsl.exe -d $Distro --exec rm -f /tmp/alice-compose.env
+  $global:LASTEXITCODE = $rc
+}

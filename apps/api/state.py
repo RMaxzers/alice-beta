@@ -57,7 +57,8 @@ class AliceState:
         self.openrouter = OpenRouterProvider(s.openrouter_api_key.get_secret_value())
         self.web = WebSearch(s.tavily_api_key.get_secret_value())
         self.hermes = HermesAdapter(s.hermes_enabled, s.hermes_api_url)
-        self.docker = DockerAdapter(frozenset(x.strip() for x in s.docker_allowed_containers.split(",") if x.strip()))
+        self.docker = DockerAdapter(frozenset(x.strip() for x in s.docker_allowed_containers.split(",") if x.strip()),
+                                    prefix=tuple(s.docker_cmd.split()))
         self.grafana_ext = GrafanaAdapter(s.grafana_external_enabled, s.grafana_url, s.grafana_service_account_token.get_secret_value())
         self.qdrant = Qdrant(s.qdrant_url)
         self.prom = PrometheusAdapter(s.prometheus_url)

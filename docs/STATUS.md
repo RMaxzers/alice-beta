@@ -8,7 +8,7 @@
 | Router | READY | 52/52 eval; rules + semantic + classifier + policy |
 | Knowledge | READY | PDF, MD, TXT, LOG, CSV, XLSX; Qdrant + SQLite; verified facts |
 | Observability | READY | Windows host, GPU, Ollama, Alice metrics; self-explanation from real data |
-| Docker | NOT INSTALLED (by decision D1) | broker ready and tested; needs a coordinated WSL2/Docker phase |
+| Docker | NOT INSTALLED (by decision D1) | broker ready; phase 2 PREPARED (docs/PHASE2-WSL-DOCKER.md), needs admin + reboot |
 | Grafana | READY | ALICE / OVERVIEW; tailnet Viewer on :8444 |
 | Cloud | READY | OpenRouter real calls OK; budget 0.05 / 1.00 USD; Tavily OK |
 | Remote access | CONFIGURED, external test PENDING | Serve :8443/:8444 verified from the PC; laptop-on-other-network test and tailnet ACL are user steps |

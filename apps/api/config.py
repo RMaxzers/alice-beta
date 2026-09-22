@@ -50,6 +50,7 @@ class Settings(BaseSettings):
     hermes_api_url: str = "http://127.0.0.1:8642"
     docker_enabled: bool = True
     docker_allowed_containers: str = "alice-qdrant,alice-prometheus,alice-grafana"
+    docker_cmd: str = ""  # e.g. "wsl.exe -d Ubuntu-24.04 --exec docker"; empty = docker.exe on PATH
     email_enabled: bool = False
     notebooklm_enabled: bool = False
     loki_enabled: bool = False

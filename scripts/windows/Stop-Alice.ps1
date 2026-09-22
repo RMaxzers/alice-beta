@@ -2,6 +2,7 @@
 .SYNOPSIS  Stop only processes Alice started (PID files). Never deletes data; never touches an Ollama it did not start.
 #>
 . "$PSScriptRoot\_common.ps1"
+if ((Get-Runtime) -eq 'docker' -and (Test-DistroRegistered)) { Invoke-Compose @('stop'); Write-Host 'stopped compose project alice (containers kept, volumes kept)' }
 foreach ($n in 'grafana', 'prometheus', 'alice-api', 'windows_exporter', 'qdrant', 'ollama') {
   $id = Get-OwnPid $n
   if ($id) {

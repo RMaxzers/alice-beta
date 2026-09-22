@@ -10,7 +10,7 @@ function Line($label, $state, $detail) {
 }
 function Get-Json($url) { try { Invoke-RestMethod $url -TimeoutSec 4 } catch { $null } }
 
-Write-Host "`nALICE BETA 0.1`n==============" -ForegroundColor Cyan
+Write-Host "`nALICE BETA 0.1  (runtime: $(Get-Runtime))`n==============" -ForegroundColor Cyan
 $hz = Get-Json 'http://127.0.0.1:8000/healthz'
 if (Test-Http 'http://127.0.0.1:8000/') { Line 'Alice UI' 'HEALTHY' 'http://127.0.0.1:8000/' } else { Line 'Alice UI' 'DOWN' 'http://127.0.0.1:8000/' }
 if ($hz) { Line 'Alice API' 'HEALTHY' 'http://127.0.0.1:8000/api' } else { Line 'Alice API' 'DOWN' '' }

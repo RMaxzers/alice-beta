@@ -38,24 +38,27 @@ class DockerAdapter:
     allowed: frozenset[str]
     runner: Runner | None = None
     exe: str | None = None
+    # Fixed command prefix from config, e.g. ("wsl.exe", "-d", "Ubuntu-24.04", "--exec", "docker").
+    # `wsl --exec` runs docker directly, without any shell inside WSL, so argv stays argv end to end.
+    prefix: tuple[str, ...] = ()
 
     def __post_init__(self):
-        self.exe = self.exe or shutil.which("docker")
+        self.exe = self.exe or (self.prefix[0] if self.prefix else shutil.which("docker"))
         self.runner = self.runner or _default_runner
 
     def status(self) -> dict:
         if not self.exe:
             return {"state": "unavailable", "detail": "Docker no instalado (decisión D1: runtime nativo, sin WSL2 en Beta 0.1)"}
-        rc, _, err = self.runner([self.exe, "version", "--format", "{{.Server.Version}}"], TIMEOUT_S)
+        rc, _, err = self.runner([*self._require(), "version", "--format", "{{.Server.Version}}"], TIMEOUT_S)
         if rc != 0:
             return {"state": "unavailable", "detail": "Daemon Docker no responde"}
         return {"state": "healthy", "detail": f"allowlist: {', '.join(sorted(self.allowed))}"}
 
     # --- validation ---------------------------------------------------------
-    def _require(self) -> str:
+    def _require(self) -> list[str]:
         if not self.exe:
             raise DockerDenied("Docker no está instalado en este equipo (decisión D1)")
-        return self.exe
+        return list(self.prefix) if self.prefix else [self.exe]
 
     def _validate_ref(self, ref: str) -> str:
         if not isinstance(ref, str) or not ID_RE.fullmatch(ref):
@@ -75,7 +78,7 @@ class DockerAdapter:
 
     # --- operations -----------------------------------------------------------
     def _ps(self) -> list[dict]:
-        out = self._run([self._require(), "ps", "-a", "--no-trunc", "--format", "{{json .}}"])
+        out = self._run([*self._require(), "ps", "-a", "--no-trunc", "--format", "{{json .}}"])
         rows = [json.loads(l) for l in out.splitlines() if l.strip()]
         return [{"name": r.get("Names"), "id": r.get("ID", "")[:12], "state": r.get("State"), "status": r.get("Status")}
                 for r in rows]
@@ -87,13 +90,13 @@ class DockerAdapter:
         names = [c["name"] for c in self.list_containers() if c["state"] == "running"]
         if not names:
             return []
-        out = self._run([self._require(), "stats", "--no-stream", "--format", "{{json .}}", *names])
+        out = self._run([*self._require(), "stats", "--no-stream", "--format", "{{json .}}", *names])
         keep = ("Name", "CPUPerc", "MemUsage", "MemPerc", "NetIO", "BlockIO", "PIDs")
         return [{k: r.get(k) for k in keep} for r in (json.loads(l) for l in out.splitlines() if l.strip())]
 
     def container_status(self, ref: str) -> dict:
         ref = self._validate_ref(ref)
-        d = json.loads(self._run([self._require(), "inspect", "--type", "container", "--", ref]))[0]
+        d = json.loads(self._run([*self._require(), "inspect", "--type", "container", "--", ref]))[0]
         st = d.get("State", {})
         health = (st.get("Health") or {}).get("Status")
         return {"name": d.get("Name", "").lstrip("/"), "state": st.get("Status"), "started_at": st.get("StartedAt"),
@@ -104,7 +107,7 @@ class DockerAdapter:
         ref = self._validate_ref(ref)
         tail = max(1, min(int(tail), LOG_MAX))
         since_s = max(1, min(int(since_s), SINCE_MAX_S))
-        out = self._run([self._require(), "logs", "--tail", str(tail), "--since", f"{since_s}s", "--", ref])
+        out = self._run([*self._require(), "logs", "--tail", str(tail), "--since", f"{since_s}s", "--", ref])
         truncated = len(out) > OUT_MAX
         text = SECRETISH.sub("<REDACTED>", out[:OUT_MAX])
         return {"name": ref, "tail": tail, "since_s": since_s, "truncated": truncated, "lines": text.splitlines()}

@@ -19,3 +19,4 @@
 | D15 | 2026-09-22 | OBSERVABILITY answers are templated from real data with no LLM | Guarantees no invented figures; faster | LLM phrasing over tool output |
 | D16 | 2026-09-22 | uvicorn runs with `--no-proxy-headers`; Alice reads the rightmost X-Forwarded-For hop itself and rejects non-loopback peers | Security review: throttle bypass via spoofed XFF; uvicorn's rewrite of request.client broke the loopback guard | Trusting uvicorn proxy headers |
 | D17 | 2026-09-22 | Browser E2E uses Playwright with the installed Edge (no browser download) against a throwaway-password test instance | Never type the real password into tooling or transcripts | Using the real credentials |
+| D18 | 2026-09-22 | Phase 2 prepared (not executed): Docker Engine in dedicated WSL2 distro, mirrored networking, host-network containers bound to 127.0.0.1, digest-pinned images, broker via `wsl --exec` | See docs/PHASE2-WSL-DOCKER.md | Docker Desktop, bridge networks, TCP daemon |
