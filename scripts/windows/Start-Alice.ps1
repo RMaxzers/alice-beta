@@ -42,7 +42,9 @@ Start-Owned 'grafana' (Join-Path $gdir 'bin\grafana.exe') @('server', '--homepat
   GF_SECURITY_ADMIN_USER = 'admin'; GF_SECURITY_ADMIN_PASSWORD = $cfg['GRAFANA_ADMIN_PASSWORD']
   GF_AUTH_ANONYMOUS_ENABLED = 'false'; GF_USERS_ALLOW_SIGN_UP = 'false'; GF_SECURITY_COOKIE_SECURE = 'false'
   GF_ANALYTICS_REPORTING_ENABLED = 'false'; GF_ANALYTICS_CHECK_FOR_UPDATES = 'false'; GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES = 'false'
-  GF_NEWS_NEWS_FEED_ENABLED = 'false'; GF_SERVER_ROOT_URL = 'http://127.0.0.1:3000/'
+  GF_NEWS_NEWS_FEED_ENABLED = 'false'
+  # Tailnet Viewer access (Serve :8444) needs a matching root URL; falls back to loopback.
+  GF_SERVER_ROOT_URL = $(if ($cfg['ALICE_GRAFANA_PUBLIC_URL']) { $cfg['ALICE_GRAFANA_PUBLIC_URL'] } else { 'http://127.0.0.1:3000/' })
 }
 
 # Wait for health, then ensure the tailnet Viewer account (idempotent; admin creds never leave this script).

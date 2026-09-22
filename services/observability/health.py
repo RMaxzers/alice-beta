@@ -47,7 +47,16 @@ class HealthChecker:
                          "checked_at": now}
         orh = await s.openrouter.health()
         out["openrouter"] = {"state": orh.state, "detail": orh.detail, "checked_at": now}
+        if orh.state == "configured_not_tested":  # survive restarts: last real, reconciled call in the ledger
+            r = s.con.execute("SELECT created_at, model FROM ledger WHERE provider='openrouter' AND state='reconciled' "
+                              "ORDER BY created_at DESC LIMIT 1").fetchone()
+            if r:
+                out["openrouter"] = {"state": "healthy", "detail": f"última llamada real OK {r['created_at'][:16]}Z ({r['model']})", "checked_at": now}
         out["web"] = {**s.web.state(), "checked_at": now}
+        if out["web"]["state"] == "configured_not_tested":
+            r = s.con.execute("SELECT started_at FROM requests WHERE provider='tavily' AND status='ok' ORDER BY started_at DESC LIMIT 1").fetchone()
+            if r:
+                out["web"] = {"state": "healthy", "detail": f"última búsqueda real OK {r['started_at'][:16]}Z", "checked_at": now}
         out["hermes"] = {**(await s.hermes.state()), "checked_at": now}
         out["docker"] = {**(await asyncio.to_thread(s.docker.status)), "checked_at": now}
         out["grafana_external"] = {**s.grafana_ext.state(), "checked_at": now}
