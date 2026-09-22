@@ -1,0 +1,43 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+2 0 obj
+<< /Length 603 >>
+stream
+BT /F1 11 Tf 50 790 Td 14 TL (INFORME DE AUDITORIA DE RED - DOCUMENTO SINTETICO DE DEMOSTRACION) ' (Organizacion ficticia: Acme Demo S.A.  Fecha: 2026-09-01) ' () ' (Resumen ejecutivo) ' (La auditoria reviso 42 equipos de red de la sede central.) ' () ' (Hallazgos principales) ' (H1. 14 switches ejecutan firmware sin soporte del fabricante.) ' (H2. La VLAN 30 de invitados no esta aislada de la VLAN 10 de servidores.) ' (H3. Tres impresoras mantienen contrasenas por defecto de fabrica.) ' (H4. No existe respaldo de configuracion de los routers de borde.) ' () ' (Nivel de riesgo global: ALTO.) ' ET
+endstream
+endobj
+3 0 obj
+<< /Type /Page /Parent 6 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+4 0 obj
+<< /Length 501 >>
+stream
+BT /F1 11 Tf 50 790 Td 14 TL (Recomendaciones) ' (R1. Actualizar el firmware de los 14 switches antes del 2026-12-31.) ' (R2. Aplicar ACL entre VLAN 30 y VLAN 10 y revisar reglas del firewall.) ' (R3. Cambiar las credenciales de las impresoras y deshabilitar servicios no usados.) ' (R4. Programar respaldo semanal automatico de configuraciones.) ' () ' (Conclusion) ' (Con las acciones R1 a R4 el riesgo global bajaria a MEDIO.) ' (Responsable de la revision: equipo ficticio de seguridad Demo.) ' ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 6 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R] /Count 2 >>
+endobj
+7 0 obj
+<< /Type /Catalog /Pages 6 0 R >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000106 00000 n 
+0000000760 00000 n 
+0000000886 00000 n 
+0000001438 00000 n 
+0000001564 00000 n 
+0000001627 00000 n 
+trailer
+<< /Size 8 /Root 7 0 R >>
+startxref
+1676
+%%EOF

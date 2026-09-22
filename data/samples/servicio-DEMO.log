@@ -1,0 +1,191 @@
+2026-09-20T08:00:15-03:00 INFO Request served in 3590 ms
+2026-09-20T08:01:13-03:00 INFO Request served in 4451 ms
+2026-09-20T08:02:03-03:00 INFO Request served in 2479 ms
+2026-09-20T08:02:47-03:00 INFO Request served in 4334 ms
+2026-09-20T08:02:52-03:00 INFO Request served in 4544 ms
+2026-09-20T08:03:16-03:00 INFO Request served in 849 ms
+2026-09-20T08:03:29-03:00 ERROR Disk usage above 90% on /var/lib/data (2167%)
+2026-09-20T08:03:41-03:00 INFO Request served in 877 ms
+2026-09-20T08:04:33-03:00 INFO Request served in 4533 ms
+2026-09-20T08:04:47-03:00 INFO Request served in 2232 ms
+2026-09-20T08:05:10-03:00 ERROR Failed to renew TLS certificate for api.demo.local (attempt 4955)
+2026-09-20T08:05:28-03:00 INFO Request served in 2809 ms
+2026-09-20T08:05:46-03:00 INFO Request served in 2163 ms
+2026-09-20T08:06:23-03:00 ERROR Disk usage above 90% on /var/lib/data (4003%)
+2026-09-20T08:06:44-03:00 INFO Request served in 417 ms
+2026-09-20T08:06:54-03:00 INFO Request served in 3470 ms
+2026-09-20T08:07:52-03:00 INFO Request served in 2267 ms
+2026-09-20T08:07:59-03:00 ERROR Failed to renew TLS certificate for api.demo.local (attempt 30)
+2026-09-20T08:08:25-03:00 INFO Request served in 1072 ms
+2026-09-20T08:09:10-03:00 INFO Request served in 2146 ms
+2026-09-20T08:09:25-03:00 INFO Request served in 3620 ms
+2026-09-20T08:10:05-03:00 INFO Request served in 3504 ms
+2026-09-20T08:10:45-03:00 WARN Slow query took 80 ms on table orders
+2026-09-20T08:10:57-03:00 INFO Request served in 617 ms
+2026-09-20T08:11:46-03:00 INFO Request served in 1222 ms
+2026-09-20T08:12:25-03:00 INFO Request served in 296 ms
+2026-09-20T08:13:23-03:00 ERROR Failed to renew TLS certificate for api.demo.local (attempt 3025)
+2026-09-20T08:14:05-03:00 INFO Request served in 4527 ms
+2026-09-20T08:14:19-03:00 ERROR Connection timeout to db-primary:5432 after 3521 ms
+2026-09-20T08:14:32-03:00 INFO Request served in 343 ms
+2026-09-20T08:14:56-03:00 INFO Request served in 2988 ms
+2026-09-20T08:15:51-03:00 INFO Request served in 327 ms
+2026-09-20T08:16:18-03:00 INFO Request served in 1721 ms
+2026-09-20T08:17:06-03:00 INFO Request served in 2045 ms
+2026-09-20T08:17:53-03:00 WARN Slow query took 843 ms on table orders
+2026-09-20T08:18:20-03:00 INFO Request served in 4587 ms
+2026-09-20T08:19:20-03:00 ERROR Connection timeout to db-primary:5432 after 3330 ms
+2026-09-20T08:20:04-03:00 INFO Request served in 1267 ms
+2026-09-20T08:20:24-03:00 INFO Request served in 1332 ms
+2026-09-20T08:21:20-03:00 INFO Request served in 1451 ms
+2026-09-20T09:00:00-03:00 INFO user login ok password=demo-not-a-real-secret
+2026-09-20T08:21:51-03:00 INFO Request served in 204 ms
+2026-09-20T08:22:07-03:00 WARN Slow query took 2722 ms on table orders
+2026-09-20T08:23:02-03:00 INFO Request served in 3373 ms
+2026-09-20T08:23:58-03:00 INFO Request served in 2033 ms
+2026-09-20T08:24:20-03:00 ERROR Failed to renew TLS certificate for api.demo.local (attempt 1305)
+2026-09-20T08:25:15-03:00 INFO Request served in 886 ms
+2026-09-20T08:25:44-03:00 INFO Request served in 318 ms
+2026-09-20T08:26:43-03:00 INFO Request served in 3856 ms
+2026-09-20T08:27:02-03:00 INFO Request served in 1635 ms
+2026-09-20T08:27:59-03:00 INFO Request served in 3771 ms
+2026-09-20T08:28:26-03:00 ERROR Connection timeout to db-primary:5432 after 2501 ms
+2026-09-20T08:29:23-03:00 INFO Request served in 1865 ms
+2026-09-20T08:29:42-03:00 INFO Request served in 194 ms
+2026-09-20T08:30:29-03:00 INFO Request served in 1583 ms
+2026-09-20T08:30:59-03:00 INFO Request served in 2690 ms
+2026-09-20T08:31:21-03:00 INFO Request served in 569 ms
+2026-09-20T08:32:15-03:00 INFO Request served in 2287 ms
+2026-09-20T08:32:42-03:00 INFO Request served in 4174 ms
+2026-09-20T08:33:12-03:00 INFO Request served in 4393 ms
+2026-09-20T08:33:38-03:00 ERROR Connection timeout to db-primary:5432 after 227 ms
+2026-09-20T08:33:50-03:00 WARN Slow query took 2140 ms on table orders
+2026-09-20T08:34:06-03:00 ERROR Disk usage above 90% on /var/lib/data (4757%)
+2026-09-20T08:34:27-03:00 INFO Request served in 314 ms
+2026-09-20T08:34:38-03:00 INFO Request served in 4888 ms
+2026-09-20T08:35:10-03:00 INFO Request served in 2832 ms
+2026-09-20T08:36:01-03:00 WARN Slow query took 2570 ms on table orders
+2026-09-20T08:36:33-03:00 INFO Request served in 4967 ms
+2026-09-20T08:37:10-03:00 ERROR Connection timeout to db-primary:5432 after 948 ms
+2026-09-20T08:37:39-03:00 INFO Request served in 4724 ms
+2026-09-20T08:37:56-03:00 INFO Request served in 2087 ms
+2026-09-20T08:38:03-03:00 WARN Slow query took 3573 ms on table orders
+2026-09-20T08:38:08-03:00 INFO Request served in 4260 ms
+2026-09-20T08:39:04-03:00 INFO Request served in 4411 ms
+2026-09-20T08:39:52-03:00 INFO Request served in 1615 ms
+2026-09-20T08:40:20-03:00 CRITICAL Worker pool exhausted, rejecting jobs (3534 queued)
+2026-09-20T08:40:29-03:00 INFO Request served in 2705 ms
+2026-09-20T08:41:13-03:00 INFO Request served in 2572 ms
+2026-09-20T08:42:00-03:00 INFO Request served in 1021 ms
+2026-09-20T08:42:51-03:00 INFO Request served in 2461 ms
+2026-09-20T08:43:28-03:00 WARN Slow query took 2534 ms on table orders
+2026-09-20T08:44:15-03:00 INFO Request served in 3346 ms
+2026-09-20T08:44:40-03:00 INFO Request served in 3297 ms
+2026-09-20T08:45:29-03:00 INFO Request served in 2423 ms
+2026-09-20T08:46:09-03:00 INFO Request served in 1043 ms
+2026-09-20T08:46:26-03:00 CRITICAL Worker pool exhausted, rejecting jobs (3445 queued)
+2026-09-20T08:47:13-03:00 ERROR Connection timeout to db-primary:5432 after 3106 ms
+2026-09-20T08:48:01-03:00 INFO Request served in 1426 ms
+2026-09-20T08:48:45-03:00 INFO Request served in 4663 ms
+2026-09-20T08:49:09-03:00 INFO Request served in 3327 ms
+2026-09-20T08:49:49-03:00 INFO Request served in 4 ms
+2026-09-20T08:50:13-03:00 INFO Request served in 2351 ms
+2026-09-20T08:50:31-03:00 INFO Request served in 3522 ms
+2026-09-20T08:51:26-03:00 INFO Request served in 4752 ms
+2026-09-20T08:52:09-03:00 ERROR Connection timeout to db-primary:5432 after 2640 ms
+2026-09-20T08:52:43-03:00 INFO Request served in 3620 ms
+2026-09-20T08:53:16-03:00 INFO Request served in 1751 ms
+2026-09-20T08:53:53-03:00 WARN Slow query took 3877 ms on table orders
+2026-09-20T08:54:48-03:00 WARN Slow query took 1391 ms on table orders
+2026-09-20T08:55:35-03:00 INFO Request served in 695 ms
+2026-09-20T08:55:58-03:00 INFO Request served in 4223 ms
+2026-09-20T08:56:45-03:00 INFO Request served in 2746 ms
+2026-09-20T08:56:55-03:00 INFO Request served in 1925 ms
+2026-09-20T08:57:43-03:00 INFO Request served in 2543 ms
+2026-09-20T08:58:02-03:00 INFO Request served in 1632 ms
+2026-09-20T08:58:16-03:00 WARN Slow query took 201 ms on table orders
+2026-09-20T08:58:23-03:00 ERROR Connection timeout to db-primary:5432 after 2006 ms
+2026-09-20T08:58:58-03:00 INFO Request served in 597 ms
+2026-09-20T08:59:32-03:00 ERROR Failed to renew TLS certificate for api.demo.local (attempt 3396)
+2026-09-20T09:00:17-03:00 INFO Request served in 4716 ms
+2026-09-20T09:00:34-03:00 INFO Request served in 3146 ms
+2026-09-20T09:01:10-03:00 ERROR Connection timeout to db-primary:5432 after 3274 ms
+2026-09-20T09:01:30-03:00 INFO Request served in 1209 ms
+2026-09-20T09:02:16-03:00 INFO Request served in 46 ms
+2026-09-20T09:03:09-03:00 INFO Request served in 874 ms
+2026-09-20T09:04:03-03:00 INFO Request served in 3483 ms
+2026-09-20T09:04:22-03:00 ERROR Connection timeout to db-primary:5432 after 1441 ms
+2026-09-20T09:05:18-03:00 INFO Request served in 4244 ms
+2026-09-20T09:05:52-03:00 INFO Request served in 412 ms
+2026-09-20T09:06:32-03:00 INFO Request served in 2042 ms
+2026-09-20T09:07:31-03:00 INFO Request served in 995 ms
+2026-09-20T09:08:05-03:00 INFO Request served in 1093 ms
+2026-09-20T09:09:01-03:00 ERROR Disk usage above 90% on /var/lib/data (3807%)
+2026-09-20T09:09:48-03:00 INFO Request served in 4352 ms
+2026-09-20T09:10:28-03:00 INFO Request served in 4878 ms
+2026-09-20T09:10:53-03:00 INFO Request served in 3626 ms
+2026-09-20T09:11:37-03:00 ERROR Connection timeout to db-primary:5432 after 4136 ms
+2026-09-20T09:12:09-03:00 WARN Slow query took 4489 ms on table orders
+2026-09-20T09:12:42-03:00 INFO Request served in 1304 ms
+2026-09-20T09:13:34-03:00 INFO Request served in 3889 ms
+2026-09-20T09:14:07-03:00 INFO Request served in 2124 ms
+2026-09-20T09:15:00-03:00 INFO Request served in 2026 ms
+2026-09-20T09:15:58-03:00 WARN Slow query took 2272 ms on table orders
+2026-09-20T09:16:52-03:00 INFO Request served in 4271 ms
+2026-09-20T09:17:28-03:00 INFO Request served in 1960 ms
+2026-09-20T09:17:50-03:00 INFO Request served in 3604 ms
+2026-09-20T09:17:59-03:00 INFO Request served in 2341 ms
+2026-09-20T09:18:19-03:00 INFO Request served in 2226 ms
+2026-09-20T09:18:45-03:00 INFO Request served in 2620 ms
+2026-09-20T09:19:24-03:00 INFO Request served in 661 ms
+2026-09-20T09:19:37-03:00 ERROR Connection timeout to db-primary:5432 after 1236 ms
+2026-09-20T09:19:56-03:00 INFO Request served in 3138 ms
+2026-09-20T09:20:45-03:00 INFO Request served in 1252 ms
+2026-09-20T09:21:35-03:00 ERROR Connection timeout to db-primary:5432 after 1753 ms
+2026-09-20T09:21:44-03:00 ERROR Connection timeout to db-primary:5432 after 3399 ms
+2026-09-20T09:22:15-03:00 ERROR Connection timeout to db-primary:5432 after 2711 ms
+2026-09-20T09:22:54-03:00 INFO Request served in 3817 ms
+2026-09-20T09:23:25-03:00 INFO Request served in 511 ms
+2026-09-20T09:23:43-03:00 INFO Request served in 3442 ms
+2026-09-20T09:24:12-03:00 ERROR Connection timeout to db-primary:5432 after 4785 ms
+2026-09-20T09:25:01-03:00 INFO Request served in 161 ms
+2026-09-20T09:26:00-03:00 ERROR Connection timeout to db-primary:5432 after 4717 ms
+2026-09-20T09:26:29-03:00 INFO Request served in 3908 ms
+2026-09-20T09:26:34-03:00 INFO Request served in 2882 ms
+2026-09-20T09:26:58-03:00 WARN Slow query took 3195 ms on table orders
+2026-09-20T09:27:57-03:00 INFO Request served in 3433 ms
+2026-09-20T09:28:36-03:00 INFO Request served in 4474 ms
+2026-09-20T09:29:32-03:00 INFO Request served in 4942 ms
+2026-09-20T09:29:51-03:00 INFO Request served in 4000 ms
+2026-09-20T09:30:10-03:00 INFO Request served in 2236 ms
+2026-09-20T09:30:42-03:00 INFO Request served in 3979 ms
+2026-09-20T09:30:48-03:00 INFO Request served in 3186 ms
+2026-09-20T09:31:14-03:00 INFO Request served in 3313 ms
+2026-09-20T09:32:05-03:00 INFO Request served in 1353 ms
+2026-09-20T09:33:03-03:00 INFO Request served in 3829 ms
+2026-09-20T09:33:16-03:00 INFO Request served in 4376 ms
+2026-09-20T09:33:22-03:00 INFO Request served in 3228 ms
+2026-09-20T09:34:04-03:00 INFO Request served in 4624 ms
+2026-09-20T09:34:51-03:00 ERROR Failed to renew TLS certificate for api.demo.local (attempt 223)
+2026-09-20T09:35:01-03:00 INFO Request served in 3512 ms
+2026-09-20T09:35:14-03:00 INFO Request served in 3783 ms
+2026-09-20T09:35:30-03:00 INFO Request served in 412 ms
+2026-09-20T09:35:51-03:00 INFO Request served in 3106 ms
+2026-09-20T09:36:16-03:00 WARN Slow query took 1734 ms on table orders
+2026-09-20T09:36:50-03:00 INFO Request served in 2678 ms
+2026-09-20T09:37:16-03:00 ERROR Connection timeout to db-primary:5432 after 3106 ms
+2026-09-20T09:37:38-03:00 INFO Request served in 3454 ms
+2026-09-20T09:37:59-03:00 ERROR Connection timeout to db-primary:5432 after 671 ms
+2026-09-20T09:38:34-03:00 ERROR Connection timeout to db-primary:5432 after 159 ms
+2026-09-20T09:39:26-03:00 INFO Request served in 4419 ms
+2026-09-20T09:39:34-03:00 INFO Request served in 2867 ms
+2026-09-20T09:39:53-03:00 ERROR Connection timeout to db-primary:5432 after 563 ms
+2026-09-20T09:40:47-03:00 INFO Request served in 330 ms
+2026-09-20T09:41:40-03:00 INFO Request served in 255 ms
+2026-09-20T09:42:00-03:00 INFO Request served in 1634 ms
+2026-09-20T09:42:58-03:00 WARN Slow query took 167 ms on table orders
+2026-09-20T09:43:42-03:00 ERROR Connection timeout to db-primary:5432 after 1249 ms
+2026-09-20T09:44:02-03:00 INFO Request served in 1035 ms
+2026-09-20T09:44:37-03:00 INFO Request served in 938 ms
+2026-09-20T09:45:18-03:00 INFO Request served in 1786 ms
+2026-09-20T09:45:52-03:00 ERROR Connection timeout to db-primary:5432 after 2100 ms

@@ -1,0 +1,41 @@
+id,equipo,tipo,sistema_operativo,area,fin_soporte,estado_soporte,licencias
+1,EQ-001,Notebook,Windows 11,TI,2031-10-14,Vigente,2
+2,EQ-002,Notebook,Windows 10,Finanzas,2025-10-14,Fuera de soporte,5
+3,EQ-003,Servidor,Windows 11,Ventas,2031-10-14,Vigente,1
+4,EQ-004,Notebook,Windows 11,Operaciones,2031-10-14,Vigente,2
+5,EQ-005,Servidor,Windows Server 2012 R2,Finanzas,2023-10-10,Fuera de soporte,5
+6,EQ-006,Servidor,Windows 10,RRHH,2025-10-14,Fuera de soporte,4
+7,EQ-007,Desktop,Windows 10,RRHH,2025-10-14,Fuera de soporte,3
+8,EQ-008,Notebook,Windows 11,Ventas,2031-10-14,Vigente,3
+9,EQ-009,Notebook,Ubuntu 24.04,Operaciones,2029-05-31,Vigente,3
+10,EQ-010,Notebook,Windows 11,Ventas,2031-10-14,Vigente,1
+11,EQ-011,Desktop,Ubuntu 24.04,RRHH,2029-05-31,Vigente,3
+12,EQ-012,Servidor,Windows 11,Ventas,2031-10-14,Vigente,5
+13,EQ-013,Desktop,Windows 11,Finanzas,2031-10-14,Vigente,5
+14,EQ-014,Servidor,Ubuntu 24.04,RRHH,2029-05-31,Vigente,3
+15,EQ-015,Notebook,Windows Server 2012 R2,Finanzas,2023-10-10,Fuera de soporte,1
+16,EQ-016,Desktop,Windows 10,Finanzas,2025-10-14,Fuera de soporte,2
+17,EQ-017,Desktop,Windows 11,TI,2031-10-14,Vigente,4
+18,EQ-018,Notebook,Ubuntu 24.04,TI,2029-05-31,Vigente,3
+19,EQ-019,Servidor,Windows 10,TI,2025-10-14,Fuera de soporte,1
+20,EQ-020,Servidor,Windows Server 2012 R2,Operaciones,2023-10-10,Fuera de soporte,5
+21,EQ-021,Notebook,Windows 10,Ventas,2025-10-14,Fuera de soporte,4
+22,EQ-022,Servidor,Ubuntu 24.04,RRHH,2029-05-31,Vigente,2
+23,EQ-023,Notebook,Ubuntu 24.04,Operaciones,2029-05-31,Vigente,1
+24,EQ-024,Desktop,Ubuntu 24.04,TI,2029-05-31,Vigente,1
+25,EQ-025,Servidor,Windows 10,TI,2025-10-14,Fuera de soporte,2
+26,EQ-026,Desktop,Windows Server 2016,Ventas,2027-01-12,Vigente,2
+27,EQ-027,Notebook,Ubuntu 24.04,Operaciones,2029-05-31,Vigente,5
+28,EQ-028,Desktop,Windows Server 2012 R2,RRHH,2023-10-10,Fuera de soporte,4
+29,EQ-029,Desktop,Windows Server 2012 R2,TI,2023-10-10,Fuera de soporte,2
+30,EQ-030,Servidor,Windows 10,Ventas,2025-10-14,Fuera de soporte,1
+31,EQ-031,Notebook,Windows 11,Operaciones,2031-10-14,Vigente,2
+32,EQ-032,Servidor,Windows Server 2016,Finanzas,2027-01-12,Vigente,4
+33,EQ-033,Servidor,Windows Server 2016,Ventas,2027-01-12,Vigente,5
+34,EQ-034,Servidor,Ubuntu 24.04,Finanzas,2029-05-31,Vigente,1
+35,EQ-035,Desktop,Windows Server 2012 R2,TI,2023-10-10,Fuera de soporte,1
+36,EQ-036,Desktop,Ubuntu 24.04,Operaciones,2029-05-31,Vigente,4
+37,EQ-037,Servidor,Windows 11,TI,2031-10-14,Vigente,5
+38,EQ-038,Servidor,Windows 10,Finanzas,2025-10-14,Fuera de soporte,3
+39,EQ-039,Servidor,Windows Server 2012 R2,Operaciones,2023-10-10,Fuera de soporte,2
+40,EQ-040,Notebook,Ubuntu 24.04,RRHH,2029-05-31,Vigente,5
