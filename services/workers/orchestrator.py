@@ -44,6 +44,7 @@ class Orchestrator:
         self.s = state
         self.slot = asyncio.Semaphore(1)  # one local generation at a time (16 GB RAM / 8 GB VRAM)
         self.waiting = 0
+        self._query_cache: dict[str, str] = {}
 
     # ------------------------------------------------------------------ helpers
     def _alias(self, name: str) -> dict:
@@ -357,21 +358,41 @@ class Orchestrator:
         if u.cost_usd:
             m.COST.labels("openrouter", d.model_alias).inc(u.cost_usd)
 
+    async def _search_query(self, message: str) -> str:
+        """Local rewrite of the request into a concise web query. Cached so the authorized payload hash is stable."""
+        key = message.strip()
+        if key in self._query_cache:
+            return self._query_cache[key]
+        schema = {"type": "object", "properties": {"query": {"type": "string", "maxLength": 120}}, "required": ["query"]}
+        prompt = ("Convierte la petición en una consulta de búsqueda web concisa, en inglés, solo palabras clave. "
+                  "No añadas información que no esté en la petición.\nPetición: " + message[:400])
+        try:
+            async with self.slot:
+                raw = await self.s.ollama.complete_json(self._alias("local-classifier")["model"],
+                                                        [{"role": "user", "content": prompt}], schema, {"temperature": 0, "num_ctx": 1024})
+            q = json.loads(raw)["query"].strip()[:120] or message[:400]
+        except Exception:  # noqa: BLE001 — fall back to the literal message
+            q = message[:400]
+        if len(self._query_cache) > 200:
+            self._query_cache.clear()
+        self._query_cache[key] = q
+        return q
+
     async def _web(self, req, user, d: RouteDecision, timing):
-        topic = "finance" if d.route == Route.FINANCIAL_RESEARCH else "news" if any(
-            w in req.message.lower() for w in ("noticia", "novedad", "reciente")) else "general"
-        # Only the current message leaves the host (no history, no documents).
-        payload = search_payload(req.message[:400], topic)
+        topic = "finance" if d.route == Route.FINANCIAL_RESEARCH else "general"
+        query = await self._search_query(req.message)
+        # Only the (locally rewritten) current message leaves the host — no history, no documents.
+        payload = search_payload(query, topic)
         res = await self._needs_ticket(req, user, "tavily", "search", payload, effective_privacy(req.privacy),
                                        f"Ruta {d.route.value}: requiere información actual de internet",
-                                       ["texto de la consulta (sin historial ni documentos)"], req.message[:400], 0.0)
+                                       ["consulta de búsqueda derivada de tu mensaje (sin historial ni documentos)"], query, 0.0)
         if isinstance(res, EgressPreview):
             timing["halted"] = True
             yield {"type": "authorization_required", "preview": res.model_dump(mode="json"),
                    "options": ["AUTHORIZE_ONCE", "CONTINUE_LOCAL", "CANCEL"]}
             return
-        results = await self.s.web.search(req.message[:400], topic, clearance=res)
-        yield {"type": "tool", "name": "web_search", "summary": f"{len(results)} resultados (Tavily, tema {topic})"}
+        results = await self.s.web.search(query, topic, clearance=res)
+        yield {"type": "tool", "name": "web_search", "summary": f"{len(results)} resultados (Tavily, tema {topic}, consulta: «{query}»)"}
         srcs = [Source(kind="web", title=r["title"] or r["url"], url=r["url"], location=r["published_date"],
                        privacy=Privacy.PUBLIC, retrieved_at=r["retrieved_at"]) for r in results]
         yield {"type": "sources", "sources": [s.model_dump(mode="json") for s in srcs]}

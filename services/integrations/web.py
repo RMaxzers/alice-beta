@@ -49,10 +49,14 @@ class WebSearch:
 
 
 # ---------------------------------------------------------------- SSRF-safe reader
+CGNAT = ipaddress.ip_network("100.64.0.0/10")  # Tailscale tailnet addresses live here
+
+
 def _ip_blocked(ip: str) -> bool:
     a = ipaddress.ip_address(ip)
     return (a.is_private or a.is_loopback or a.is_link_local or a.is_multicast or a.is_reserved or a.is_unspecified
-            or (a.version == 6 and a.ipv4_mapped and _ip_blocked(str(a.ipv4_mapped))) or ip.startswith("100.64."))
+            or (a.version == 4 and a in CGNAT)
+            or (a.version == 6 and a.ipv4_mapped is not None and _ip_blocked(str(a.ipv4_mapped))))
 
 
 def check_url(url: str) -> str:
