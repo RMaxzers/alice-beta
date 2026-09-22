@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { apiGet } from "../api";
 import { LineChart } from "../components/LineChart";
-import { formatBytesGiB, formatMetric } from "../format";
+import { formatBytesGiB, formatDateSantiago, formatMetric } from "../format";
 import type { HealthEntry, ObservabilityOverview, RangeResponse } from "../types";
 
 const HEALTH_COLOR: Record<string, string> = {
@@ -63,15 +63,15 @@ export function Observability() {
       <section className="panel">
         <h2>Métricas actuales</h2>
         <div className="metric-grid">
-          <MetricCard label="CPU host" value={formatMetric(m.host_cpu_percent, "%")} />
+          <MetricCard label="CPU host" value={formatMetric(m.host_cpu_percent.value, "%")} />
           <MetricCard
             label="RAM host"
-            value={`${formatBytesGiB(m.host_mem_used_bytes)} / ${formatBytesGiB(m.host_mem_total_bytes)}`}
+            value={`${formatBytesGiB(m.host_mem_used_bytes.value)} / ${formatBytesGiB(m.host_mem_total_bytes.value)}`}
           />
-          <MetricCard label="GPU uso" value={formatMetric(m.gpu_util_percent, "%")} />
+          <MetricCard label="GPU uso" value={formatMetric(m.gpu_util_percent.value, "%")} />
           <MetricCard
             label="GPU memoria"
-            value={`${formatBytesGiB(m.gpu_mem_used_bytes)} / ${formatBytesGiB(m.gpu_mem_total_bytes)}`}
+            value={`${formatBytesGiB(m.gpu_mem_used_bytes.value)} / ${formatBytesGiB(m.gpu_mem_total_bytes.value)}`}
           />
           <MetricCard
             label="GPU temperatura"
@@ -136,7 +136,7 @@ export function Observability() {
               {overview.recent_requests.map((r) => (
                 <tr key={r.request_id}>
                   <td>{r.request_id}</td>
-                  <td>{r.started_at}</td>
+                  <td>{formatDateSantiago(r.started_at)}</td>
                   <td>{r.route}</td>
                   <td>{r.provider}</td>
                   <td>{r.model}</td>
@@ -159,7 +159,7 @@ export function Observability() {
           <p>Grafana no está configurado.</p>
         )}
         <p className="hint">
-          Grafana escucha solo en este PC (127.0.0.1). Desde el laptop remoto usa esta vista o el acceso Viewer de la
+          Grafana escucha en 127.0.0.1; desde la tailnet se publica con login Viewer (usuario «viewer»). Si no tienes acceso, usa esta vista o el acceso Viewer de la
           tailnet si está configurado.
         </p>
       </section>

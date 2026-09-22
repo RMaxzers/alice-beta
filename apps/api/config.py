@@ -40,6 +40,7 @@ class Settings(BaseSettings):
     qdrant_url: str = "http://127.0.0.1:6333"
     prometheus_url: str = "http://127.0.0.1:9090"
     alice_grafana_local_url: str = "http://127.0.0.1:3000"
+    alice_grafana_public_url: str = ""
 
     grafana_external_enabled: bool = False
     grafana_url: str = ""

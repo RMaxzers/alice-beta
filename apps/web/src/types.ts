@@ -166,7 +166,7 @@ export interface HealthEntry {
   checked_at: string | null;
 }
 
-export interface GpuTemp {
+export interface MetricValue {
   value: number | null;
   unit: string;
   age_s?: number;
@@ -174,13 +174,13 @@ export interface GpuTemp {
 }
 
 export interface ObservabilityMetrics {
-  host_cpu_percent: number | null;
-  host_mem_used_bytes: number | null;
-  host_mem_total_bytes: number | null;
-  gpu_util_percent: number | null;
-  gpu_mem_used_bytes: number | null;
-  gpu_mem_total_bytes: number | null;
-  gpu_temp_c: GpuTemp;
+  host_cpu_percent: MetricValue;
+  host_mem_used_bytes: MetricValue;
+  host_mem_total_bytes: MetricValue;
+  gpu_util_percent: MetricValue;
+  gpu_mem_used_bytes: MetricValue;
+  gpu_mem_total_bytes: MetricValue;
+  gpu_temp_c: MetricValue;
 }
 
 export interface RecentRequest {

@@ -33,8 +33,7 @@ export function LineChart({ points, width = 320, height = 80, color = "#3fd9c7",
         <polyline points={path} fill="none" stroke={color} strokeWidth="1.5" />
       </svg>
       <div className="linechart__last">
-        último: {last.toFixed(1)}
-        {unit ? ` ${unit}` : ""}
+        último: {unit === "bytes" ? `${(last / 1024 ** 3).toFixed(1)} GiB` : `${last.toFixed(1)}${unit ? ` ${unit}` : ""}`}
       </div>
     </div>
   );

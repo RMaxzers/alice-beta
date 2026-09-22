@@ -259,7 +259,8 @@ async def overview(request: Request, user: str = Depends(require_user)):
         "SELECT request_id, started_at, route, provider, model, status, duration_s FROM requests ORDER BY started_at DESC LIMIT 15")]
     for r in out["recent_requests"]:
         r["request_id"] = r["request_id"][:8]
-    out["grafana_url"] = st.settings.alice_grafana_local_url.rstrip("/") + "/d/alice-overview"
+    base = st.settings.alice_grafana_public_url if (is_proxied(request) and st.settings.alice_grafana_public_url) else st.settings.alice_grafana_local_url
+    out["grafana_url"] = base.rstrip("/") + "/d/alice-overview"
     return out
 
 
