@@ -25,7 +25,7 @@ Start-Owned 'windows_exporter' (Join-Path $Bin "winexp-$($w.ver)\windows_exporte
 
 # 4. Alice API (+ metrics on 9101)
 $py = Join-Path $Root '.venv\Scripts\python.exe'
-Start-Owned 'alice-api' $py @('-m', 'uvicorn', 'apps.api.main:app', '--host', '127.0.0.1', '--port', '8000', '--no-server-header', '--log-level', 'warning')
+Start-Owned 'alice-api' $py @('-m', 'uvicorn', 'apps.api.main:app', '--host', '127.0.0.1', '--port', '8000', '--no-server-header', '--no-proxy-headers', '--log-level', 'warning')
 
 # 5. Prometheus
 $p = $Versions.prometheus; $pdir = Join-Path $Bin "prometheus-$($p.ver)\prometheus-$($p.ver).windows-amd64"

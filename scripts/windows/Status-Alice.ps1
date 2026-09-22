@@ -4,7 +4,7 @@
 . "$PSScriptRoot\_common.ps1"
 $ok = 0; $bad = 0
 function Line($label, $state, $detail) {
-  $color = switch -Regex ($state) { '^HEALTHY|^READY|^OK' { 'Green' } '^DISABLED|^PENDING|^NOT_CONFIGURED|^CONFIGURED' { 'Yellow' } default { 'Red' } }
+  $color = switch -Regex ($state) { '^HEALTHY|^READY|^OK' { 'Green' } '^DISABLED|^PENDING|^NOT_CONFIGURED|^CONFIGURED|^NOT_INSTALLED' { 'Yellow' } default { 'Red' } }
   Write-Host ("{0,-15}" -f "${label}:") -NoNewline; Write-Host ("{0,-16}" -f $state) -ForegroundColor $color -NoNewline; Write-Host " $detail"
   if ($color -eq 'Green') { $Script:ok++ } elseif ($color -eq 'Red') { $Script:bad++ }
 }
@@ -38,7 +38,8 @@ if ($g -and $g.database -eq 'ok') { Line 'Grafana' 'HEALTHY' "http://127.0.0.1:3
 if ($hz) {
   foreach ($k in 'hermes', 'openrouter', 'web', 'docker') {
     $s = $hz.integrations.$k
-    Line (@{hermes='Hermes';openrouter='OpenRouter';web='Web search';docker='Docker'}[$k]) $s.state.ToUpper() $s.detail
+    $st = $s.state.ToUpper(); if ($k -eq "docker" -and $st -eq "UNAVAILABLE" -and $s.detail -match "no instalado") { $st = "NOT_INSTALLED" }
+    Line (@{hermes="Hermes";openrouter="OpenRouter";web="Web search";docker="Docker"}[$k]) $st $s.detail
   }
 } else { Line 'OpenRouter' 'UNKNOWN' 'API down' }
 

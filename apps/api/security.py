@@ -57,12 +57,12 @@ class Sessions:
             return None
         return data if data.get("exp", 0) > time.time() else None
 
-    def throttle(self, key: str) -> None:
+    def throttle(self, key: str, limit: int = 5) -> None:
         q = self.failures[key]
         now = time.time()
         while q and now - q[0] > 300:
             q.popleft()
-        if len(q) >= 5:
+        if len(q) >= limit:
             raise HTTPException(429, "Demasiados intentos; espera unos minutos")
 
     def fail(self, key: str) -> None:

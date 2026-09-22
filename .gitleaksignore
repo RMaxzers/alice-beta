@@ -1,0 +1,2 @@
+# Synthetic fake key used to test log redaction (tests/security/test_privacy.py). Not a real credential.
+120936c7804e577cc92dfa0faab68eb759d89d9d:tests/security/test_privacy.py:generic-api-key:84

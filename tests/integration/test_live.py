@@ -102,6 +102,14 @@ def test_login_throttle_is_per_client():
     assert codes[:5] == [401] * 5 and codes[5] == 429
 
 
+def test_login_throttle_cannot_be_bypassed_by_spoofed_xff():
+    """Serve appends the real peer as the LAST hop; rotating the client-controlled first hop must not reset the bucket."""
+    real = f"100.64.{__import__('secrets').randbelow(250)}.{__import__('secrets').randbelow(250) + 1}"
+    codes = [httpx.post(f"{BASE}/api/login", json={"username": "admin", "password": "wrong"},
+                        headers={"x-forwarded-for": f"203.0.113.{i}, {real}"}).status_code for i in range(6)]
+    assert codes[5] == 429, codes
+
+
 def test_metrics_port_is_loopback_only_and_not_on_api_port():
     assert "alice_requests_total" in httpx.get("http://127.0.0.1:9101/metrics").text
     assert httpx.get(f"{BASE}/metrics").status_code in (401, 404, 503) or "alice_requests_total" not in httpx.get(f"{BASE}/metrics").text

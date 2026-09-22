@@ -1,5 +1,6 @@
 # Shared helpers for Alice Windows scripts. Dot-source only.
 $ErrorActionPreference = 'Stop'
+try { [Console]::OutputEncoding = [Text.Encoding]::UTF8 } catch {}
 $Script:Root   = (Resolve-Path "$PSScriptRoot\..\..").Path
 $Script:Bin    = Join-Path $Root 'infra\bin'
 $Script:RunDir = Join-Path $Root 'storage\run'

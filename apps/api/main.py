@@ -51,6 +51,9 @@ app = FastAPI(title="Alice", version="0.1.0-beta.1", lifespan=lifespan, docs_url
 
 @app.middleware("http")
 async def guard(request: Request, call_next):
+    # Defense in depth: only loopback peers (local browser or Tailscale Serve), even if ever bound to another interface.
+    if request.client and request.client.host not in ("127.0.0.1", "::1", "localhost", "testclient"):
+        return JSONResponse({"detail": "Solo loopback"}, status_code=403)
     if is_proxied(request) and not external_allowed(request.url.path):
         return JSONResponse({"detail": "No encontrado"}, status_code=404)
     resp: Response = await call_next(request)
@@ -89,12 +92,16 @@ class Login(BaseModel):
 @app.post("/api/login")
 async def login(body: Login, request: Request):
     st = S(request)
-    key = request.headers.get("x-forwarded-for", request.client.host if request.client else "?")
+    # Rightmost X-Forwarded-For hop is the one appended by Tailscale Serve; earlier entries are client-controlled.
+    xff = request.headers.get("x-forwarded-for", "")
+    key = xff.split(",")[-1].strip() if xff else (request.client.host if request.client else "?")
     st.sessions.throttle(key)
+    st.sessions.throttle("*", limit=30)  # global cap: rotating identities can't get unlimited guesses
     ok_user = hmac.compare_digest(body.username, st.settings.alice_username)
     ok_pw = hmac.compare_digest(body.password.encode(), st.settings.alice_password.get_secret_value().encode())
     if not (ok_user and ok_pw):
         st.sessions.fail(key)
+        st.sessions.fail("*")
         await asyncio.sleep(0.5)
         raise HTTPException(401, "Credenciales inválidas")
     token, csrf = st.sessions.issue(body.username)
